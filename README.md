@@ -16,6 +16,13 @@
 
 ## Background
 
+For use with:
+
+* [`crypto-ld`](https://github.com/digitalbazaar/crypto-ld) `^4.0.0`.
+* [`jsonld-signatures`](https://github.com/digitalbazaar/jsonld-signatures) `digitalbazaar/jsonld-signatures#v6.x`
+* `ed25519-signature-2020`
+* [`vc-js`](https://github.com/digitalbazaar/vc-js) `digitalbazaar/vc-js#v7.x`
+
 See also (related specs):
 
 * [Ed25519VerificationKey2020](https://w3c-ccg.github.io/lds-ed25519-2020/#ed25519verificationkey2020) spec.
