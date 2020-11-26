@@ -39,7 +39,111 @@ npm install
 
 ## Usage
 
-...
+### Generating a new public/private key pair
+
+To generate a new public/private key pair:
+
+* `{string} [controller]` Optional controller URI or DID to initialize the
+  generated key. (This will also init the key id.) 
+* `{string} [seed]` Optional deterministic seed value from which to generate the 
+  key.
+
+```js
+import {Ed25519VerificationKey2020} from '@digitalbazaar/ed25519-verification-key-2020';
+
+const edKeyPair = await Ed25519VerificationKey2020.generate();
+```
+
+### Importing a key pair from storage
+
+To create an instance of a public/private key pair from data imported from
+storage, use `.from()`:
+
+```js
+const serializedKeyPair = { ... };
+
+const keyPair = await Ed25519VerificationKey2020.from(serializedKeyPair);
+````
+
+### Exporting the public key only
+
+To export just the public key of a pair:
+
+```js
+await keyPair.export({publicKey: true});
+// ->
+{ 
+  type: 'Ed25519VerificationKey2020',
+  id: 'did:example:1234#z6MkszZtxCmA2Ce4vUV132PCuLQmwnaDD5mw2L23fGNnsiX3',
+  controller: 'did:example:1234',
+  publicKeyMultibase: 'zEYJrMxWigf9boyeJMTRN4Ern8DJMoCXaLK77pzQmxVjf'
+}
+```
+
+### Exporting the full public-private key pair
+
+To export the full key pair, including private key (warning: this should be a
+carefully considered operation, best left to dedicated Key Management Systems):
+
+```js
+await keyPair.export({publicKey: true, privateKey: true});
+// ->
+{
+  type: 'Ed25519VerificationKey2020',
+  id: 'did:example:1234#z6MkszZtxCmA2Ce4vUV132PCuLQmwnaDD5mw2L23fGNnsiX3',
+  controller: 'did:example:1234',
+  publicKeyMultibase: 'zEYJrMxWigf9boyeJMTRN4Ern8DJMoCXaLK77pzQmxVjf',
+  privateKeyMultibase: 'z4E7Q4neNHwv3pXUNzUjzc6TTYspqn9Aw6vakpRKpbVrCzwKWD4hQDHnxuhfrTaMjnR8BTp9NeUvJiwJoSUM6xHAZ'
+}
+```
+
+### Generating and verifying key fingerprint
+
+To generate a fingerprint:
+
+```js
+keyPair.fingerprint();
+// ->
+'z6MkszZtxCmA2Ce4vUV132PCuLQmwnaDD5mw2L23fGNnsiX3'
+```
+
+To verify a fingerprint:
+
+```js
+const fingerprint = 'z6MkszZtxCmA2Ce4vUV132PCuLQmwnaDD5mw2L23fGNnsiX3';
+keyPair.verifyFingerprint({fingerprint});
+// ->
+{valid: true}
+```
+
+### Creating a signer function
+
+In order to perform a cryptographic signature, you need to create a `sign`
+function, and then invoke it.
+
+```js
+const keyPair = Ed25519VerificationKey2020.generate();
+
+const {sign} = keyPair.signer();
+
+const data = Buffer.from('test data to sign', 'utf8');
+const signatureValue = await sign({data});
+```
+
+### Creating a verifier function
+
+In order to verify a cryptographic signature, you need to create a `verify`
+function, and then invoke it (passing it the data to verify, and the signature).
+
+```js
+const keyPair = Ed25519VerificationKey2020.generate();
+
+const {verify} = keyPair.verifier();
+
+const valid = await verify({data, signature});
+// true
+```
+
 
 ## Contribute
 
@@ -57,4 +161,4 @@ Digital Bazaar: support@digitalbazaar.com
 
 ## License
 
-[New BSD License (3-clause)](LICENSE) © Digital Bazaar
+[New BSD License (3-clause)](LICENSE) © 2020 Digital Bazaar
