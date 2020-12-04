@@ -47,7 +47,7 @@
     "buffer": false,
     "crypto": false,
     "util": false,
-    "./lib/crypto.js": "./lib/crypto-browser.js"
+    "./lib/ed25519.js": "./lib/ed25519-browser.js"
   },
   "engines": {
     "node": ">=14"
