@@ -18,7 +18,6 @@ export const suites = [
       privateKeyMultibase: 'z5PHLJ46vQHSiYR3cSWzXrh5BVgEmTty5BB7xkau3M3aJ' +
       '2v1szyJH6CKK3LVyuWATD5DAFpEuKViu4Mad9uFxNBvo',
     },
-    // this signature was produced by a key made by node's crypto functions
     signature: '5exHkpes9ZSLXJoUuAM81s9Z13DwzJYL5ekYMpi7buhSVL29qA3QsVg7' +
       'xQqQabAFXjEqDJ1yJPFYdmgPBhpDbB1o',
     data: 'node key test'
@@ -32,7 +31,6 @@ export const suites = [
       privateKeyMultibase: 'z3rTFJmBKVmcbBw5aiBZBzpCeKn1Q13t44jwJ7YRBpNvu' +
         'unv4u38G2gQJk72cHCVmrNVrfpuYYDMqMxBeejmeDfS'
     },
-    // this signature was produced by a key made by node's crypto functions
     signature: '4jeH7SPFDQfG8PRTpCk2EUmgZUGDRGeCQPW66H98PAbw1eep6h2br4qBhg' +
       'oBHNiGQk65KWaeN6NPcnzN2Sq3HUke',
     data: 'browser key test'
