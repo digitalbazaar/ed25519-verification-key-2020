@@ -15,14 +15,8 @@ export const mockNodeKey = {
   privateKeyMultibase: 'z5PHLJ46vQHSiYR3cSWzXrh5BVgEmTty5BB7xkau3M3aJ' +
     '2v1szyJH6CKK3LVyuWATD5DAFpEuKViu4Mad9uFxNBvo',
   // this signature was produced by a key made by node's crypto functions
-  signature: new Uint8Array([
-    232, 204, 37, 31, 118, 33, 186, 20, 31, 207, 112,
-    158, 53, 137, 21, 139, 162, 228, 11, 43, 233, 1,
-    35, 122, 236, 221, 127, 197, 65, 52, 114, 195, 77,
-    49, 237, 109, 194, 72, 114, 77, 235, 137, 179, 157,
-    84, 103, 246, 233, 68, 233, 119, 85, 45, 172, 147,
-    141, 11, 29, 226, 16, 155, 173, 65, 6
-  ]),
+  signature: '5exHkpes9ZSLXJoUuAM81s9Z13DwzJYL5ekYMpi7buhSVL29qA3QsVg7' +
+    'xQqQabAFXjEqDJ1yJPFYdmgPBhpDbB1o',
   data: 'node key test'
 };
 
