@@ -5,38 +5,36 @@ import chai from 'chai';
 chai.should();
 
 import {Ed25519VerificationKey2020} from '../';
-import {mockKey} from './mock-data.js';
 import {stringToUint8Array} from './text-encoder.js';
-import * as base58btc from 'base58-universal';
+import * as StableLibEd25519 from '@stablelib/ed25519';
+import {randomBytes} from 'crypto';
 
-const keyPair = new Ed25519VerificationKey2020({
-  controller: 'did:example:1234',
-  ...mockKey
-});
+import {promisify} from 'util';
 
-const signer = keyPair.signer();
-const verifier = keyPair.verifier();
-
-// the same signature should be generated on every test platform
-// (eg. browser, node14)
-const targetSignatureBase58 = '57PG4Ahy97k8iwmRVf8bEK9ZXuy8Q7wz3Mx' +
-  'BQkwrNE5jsGaiWdzYnEK1SiP8yZ4VfEujd4FCkfxzUaBQQEZzL6PK';
+const randomBytesAsync = promisify(randomBytes);
 
 describe('compatibility', () => {
-  describe('node crypto keys', () => {
+  describe('node ed25519 keys', () => {
     it('should verify signature from @stablelib/ed25519', async () => {
-      const data = stringToUint8Array('test 1234');
-      const signature = await signer.sign({data});
-      base58btc.encode(signature).should.equal(targetSignatureBase58);
-      const result = await verifier.verify({data, signature});
+      const seed = await randomBytesAsync(32);
+      const data = stringToUint8Array('node key test');
+      const {secretKey} = await StableLibEd25519.generateKeyPairFromSeed(seed);
+      const signature = await StableLibEd25519.sign(secretKey, data);
+      const libraryNodeKey = await Ed25519VerificationKey2020.generate({seed});
+      const result = await libraryNodeKey.verifier().verify({data, signature});
       result.should.be.true;
     });
-    it('should verify signature from node-forge ed25519', async () => {
-      const data = stringToUint8Array('test 1234');
-      const signature = await signer.sign({data});
-      const changedData = stringToUint8Array('test 4321');
-      const result = await verifier.verify({data: changedData, signature});
-      result.should.be.false;
+  });
+  describe('@stablelib ed25519 keys', () => {
+    it('should verify signature from node ed25519 keys', async () => {
+      const data = stringToUint8Array('ed25519 key test');
+      const seed = await randomBytesAsync(32);
+      const libraryNodeKey = await Ed25519VerificationKey2020.generate({seed});
+      const signature = await libraryNodeKey.signer().sign({data});
+      const {publicKey} = await StableLibEd25519.generateKeyPairFromSeed(seed);
+      const result = await StableLibEd25519.verify(
+        publicKey, data, signature);
+      result.should.be.true;
     });
   });
 });
