@@ -8,7 +8,8 @@ module.exports = {
     'eslint-config-digitalbazaar/jsdoc'
   ],
   env: {
-    node: true
+    node: true,
+    browser: true
   },
   parserOptions: {
     // this is required for dynamic import()
