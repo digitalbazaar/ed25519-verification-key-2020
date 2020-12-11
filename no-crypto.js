@@ -1,2 +1,7 @@
-// throw an error when attempting to load 'crypto'
-throw new Error('\'crypto\' module not supported');
+// browser MUST provide "crypto.getRandomValues"
+const crypto = self && (self.crypto || self.msCrypto);
+if(!crypto.getRandomValues) {
+  throw new Error('Browser does not provide "crypto.getRandomValues".');
+}
+
+export default crypto;

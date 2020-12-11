@@ -11,6 +11,7 @@ module.exports = {
     libraryTarget: 'umd'
   },
   node: false,
+
   resolve: {
     alias: {
       // throw an error if trying to import 'crypto'
