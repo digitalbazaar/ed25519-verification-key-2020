@@ -1,6 +1,8 @@
 /*
  * Copyright (c) 2020 Digital Bazaar, Inc. All rights reserved.
  */
+const path = require('path');
+
 module.exports = function(config) {
 
   config.set({
@@ -28,7 +30,15 @@ module.exports = function(config) {
     webpack: {
       //mode: 'production',
       mode: 'development',
-      devtool: 'inline-source-map'
+      devtool: 'inline-source-map',
+      node: {
+        crypto: false
+      },
+      resolve: {
+        alias: {
+          crypto$: path.resolve(__dirname, 'no-crypto.js')
+        }
+      }
     },
 
     // test results reporter to use
