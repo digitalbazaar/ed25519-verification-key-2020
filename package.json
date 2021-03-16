@@ -20,6 +20,7 @@
     "esm": "^3.2.25"
   },
   "devDependencies": {
+    "@digitalbazaar/ed25519-verification-key-2018": "digitalbazaar/ed25519-verification-key-2018#cryptold-5",
     "chai": "^4.2.0",
     "cross-env": "^7.0.2",
     "eslint": "^7.9.0",
