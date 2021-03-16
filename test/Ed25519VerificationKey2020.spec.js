@@ -2,14 +2,18 @@
  * Copyright (c) 2020 Digital Bazaar, Inc. All rights reserved.
  */
 import chai from 'chai';
+import chaiBytes from 'chai-bytes';
 import * as base58btc from 'base58-universal';
 import {mockKey, seed} from './mock-data.js';
 import multibase from 'multibase';
 import multicodec from 'multicodec';
 const should = chai.should();
+chai.use(chaiBytes);
 const {expect} = chai;
 
 import {Ed25519VerificationKey2020} from '../';
+import {Ed25519VerificationKey2018}
+  from '@digitalbazaar/ed25519-verification-key-2018';
 
 describe('Ed25519VerificationKey2020', () => {
   describe('constructor', () => {
@@ -222,6 +226,48 @@ describe('Ed25519VerificationKey2020', () => {
       result.valid.should.be.a('boolean');
       result.valid.should.be.true;
       fingerprint.should.equal(fingerprint2);
+    });
+  });
+
+  describe('Backwards compat with Ed25519VerificationKey2018', () => {
+    const seedBytes = (new TextEncoder()).encode(seed).slice(0, 32);
+
+    it('2020 key should import from 2018', async () => {
+      const keyPair2018 = await Ed25519VerificationKey2018.generate({
+        seed: seedBytes, controller: 'did:example:1234'
+      });
+
+      const keyPair2020 = await Ed25519VerificationKey2020
+        .fromEd25519VerificationKey2018({keyPair: keyPair2018});
+
+      // Both should have the same fingerprint
+      expect(keyPair2018.fingerprint()).to.equal(keyPair2020.fingerprint());
+
+      // Both should sign and verify the same
+      const data = (new TextEncoder()).encode('test data goes here');
+      const signatureBytes2018 = await keyPair2018.signer().sign({data});
+
+      const signatureBytes2020 = await keyPair2020.signer().sign({data});
+
+      expect(signatureBytes2018).to.equalBytes(signatureBytes2020);
+      expect(
+        await keyPair2020.verifier()
+          .verify({data, signature: signatureBytes2018})
+      ).to.be.true;
+    });
+
+    it('2020 key should generate the same from seed as 2018', async () => {
+      const keyPair2018 = await Ed25519VerificationKey2018.generate({
+        seed: seedBytes, controller: 'did:example:1234'
+      });
+      const keyPair2020 = await Ed25519VerificationKey2020.generate({
+        seed: seedBytes, controller: 'did:example:1234'
+      });
+
+      const data = (new TextEncoder()).encode('test data goes here');
+      const signatureBytes2018 = await keyPair2018.signer().sign({data});
+      const signatureBytes2020 = await keyPair2020.signer().sign({data});
+      expect(signatureBytes2018).to.equalBytes(signatureBytes2020);
     });
   });
 });

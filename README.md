@@ -151,6 +151,51 @@ const valid = await verify({data, signature});
 // true
 ```
 
+### Converting from previous Ed25519VerificationKey2018 key type
+
+If you have serialized and stored keys of the previous 
+`Ed25519VerificationKey2018` key type (for example, generated using
+the [`ed25519-verification-key-2018`](https://github.com/digitalbazaar/ed25519-verification-key-2018))
+library, or using the `Ed25519KeyPair` keys bundled with `crypto-ld v3.x`),
+things to keep in mind:
+
+* Instances of those key types still contain the same key material, the only
+  thing that has changed from the 2018 suite to the 2020 is the way the public
+  and private key material is serialized, when exporting. The 2018 suite key 
+  types serialize using the `publicKeyBase58` and `privateKeyBase58` properties,
+  and the 2020 suite key (this repo) serializes using corresponding
+  `publicKeyMultibase` and `privateKeyMultibase` property.
+* You can convert from the 2018 key type to the 2020 using the provided
+  `Ed25519VerificationKey2020.fromEd25519VerificationKey2018()` method (see below).
+* They `generate()` the same key material, given the same `seed` parameter.
+* Both the 2018 and 2020 keys produce and verify the same signatures.
+
+Example of converting:
+
+```js
+import {Ed25519VerificationKey2018}
+  from '@digitalbazaar/ed25519-verification-key-2018';
+import {Ed25519VerificationKey2020}
+  from '@digitalbazaar/ed25519-verification-key-2020';
+
+const keyPair2018 = await Ed25519VerificationKey2018.generate({
+  controller: 'did:example:1234'
+});
+
+const keyPair2020 = await Ed25519VerificationKey2020
+  .fromEd25519VerificationKey2018({keyPair: keyPair2018});
+
+// The resulting keyPair2020 will have the same `id` and `controller` properties
+// as its 2018 source. They will also produce and verify the same signatures.
+
+const data = (new TextEncoder()).encode('test data goes here');
+const signatureBytes2018 = await keyPair2018.signer().sign({data});
+
+// this is the same signature as that produced by the 2020 key. And will verify
+// the same.
+await keyPair2020.verifier().verify({data, signature: signatureBytes2018})
+// true
+```
 
 ## Contribute
 

@@ -22,6 +22,7 @@
   "devDependencies": {
     "@digitalbazaar/ed25519-verification-key-2018": "digitalbazaar/ed25519-verification-key-2018#cryptold-5",
     "chai": "^4.2.0",
+    "chai-bytes": "^0.1.2",
     "cross-env": "^7.0.2",
     "eslint": "^7.9.0",
     "eslint-config-digitalbazaar": "^2.0.0",
