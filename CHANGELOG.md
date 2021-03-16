@@ -1,9 +1,10 @@
 # @digitalbazaar/ed25519-verification-key-2020 ChangeLog
 
-## 1.1.0 -
+## 2.0.0 -
 
 ## Changed
-- Update to use `crypto-ld v5.0`. No public API changes from the previous v4 dep.
+- Update to use `crypto-ld v5.0`.
+- **BREAKING**: Removed helper methods `addPublicKey` and `addPrivateKey`.
 
 ## Added
 - Add `Ed25519VerificationKey2020.fromEd25519VerificationKey2018()` method,
