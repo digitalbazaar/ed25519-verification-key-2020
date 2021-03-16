@@ -70,8 +70,10 @@ describe('Ed25519VerificationKey2020', () => {
 
   describe('export', () => {
     it('should export id, type and key material', async () => {
+      // Encoding returns a 64 byte uint8array, seed needs to be 32 bytes
+      const seedBytes = (new TextEncoder()).encode(seed).slice(0, 32);
       const keyPair = await Ed25519VerificationKey2020.generate({
-        seed: Buffer.from(seed, 'hex'), controller: 'did:example:1234'
+        seed: seedBytes, controller: 'did:example:1234'
       });
       const exported = await keyPair.export({
         publicKey: true, privateKey: true
@@ -80,12 +82,12 @@ describe('Ed25519VerificationKey2020', () => {
       expect(exported.controller).to.equal('did:example:1234');
       expect(exported.type).to.equal('Ed25519VerificationKey2020');
       expect(exported.id).to.equal('did:example:1234#' +
-        'z6MkjLrk3gKS2nnkeWcmcxiZPGskmesDpuwRBorgHxUXfxnG');
+        'z6Mkpw72M9suPCBv48X2Xj4YKZJH9W7wzEK1aS6JioKSo89C');
       expect(exported).to.have.property('publicKeyMultibase',
-        'z5tbhTS4zhFJHY1n4wPkiYBKkx5bNR2h4VnwkTgWWkjzt');
+        'zBUqykudU3ehSwdgKrA6hUTkHKvr6aM4etRBNtXMRsuMp');
       expect(exported).to.have.property('privateKeyMultibase',
-        'z3oVh1q7ATzrYZ14sMS13rKynAqyyzeHSbv2UpaqY1LggKEc4Ji2a69jtJnM' +
-        'pGAzsFzY2NTUQymGK35XzgpywqcFv');
+        'z28PTidbitmCPf5tzHVLnAUNu1KuLXVvrnEKSgCZzjoRDWyh156tjJYN1uwptLjF' +
+        'CeHXaCNDmbjyzezLjMxaxD5Rg');
     });
   });
 
@@ -101,8 +103,10 @@ describe('Ed25519VerificationKey2020', () => {
 
   describe('static from', () => {
     it('should round-trip load exported keys', async () => {
+      // Encoding returns a 64 byte uint8array, seed needs to be 32 bytes
+      const seedBytes = (new TextEncoder()).encode(seed).slice(0, 32);
       const keyPair = await Ed25519VerificationKey2020.generate({
-        seed: Buffer.from(seed, 'hex'), controller: 'did:example:1234'
+        seed: seedBytes, controller: 'did:example:1234'
       });
       const exported = await keyPair.export({
         publicKey: true, privateKey: true
