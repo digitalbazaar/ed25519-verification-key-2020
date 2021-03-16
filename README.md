@@ -160,12 +160,12 @@ library, or using the `Ed25519KeyPair` keys bundled with `crypto-ld v3.x`),
 things to keep in mind:
 
 * Instances of those key types still contain the same key material, the only
-  thing that has changed from the 2018 suite to the 2020 is the way the public
-  and private key material is serialized, when exporting. The 2018 suite key 
+  thing that has changed from the 2018 suite to the 2020 suite is the way the public
+  and private key material is serialized when exporting. The 2018 suite key 
   types serialize using the `publicKeyBase58` and `privateKeyBase58` properties,
   and the 2020 suite key (this repo) serializes using corresponding
   `publicKeyMultibase` and `privateKeyMultibase` property.
-* You can convert from the 2018 key type to the 2020 using the provided
+* You can convert from the 2018 key type to the 2020 key type using the provided
   `Ed25519VerificationKey2020.fromEd25519VerificationKey2018()` method (see below).
 * They `generate()` the same key material, given the same `seed` parameter.
 * Both the 2018 and 2020 keys produce and verify the same signatures.
