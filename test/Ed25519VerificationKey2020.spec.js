@@ -2,13 +2,13 @@
  * Copyright (c) 2020 Digital Bazaar, Inc. All rights reserved.
  */
 import chai from 'chai';
-import chaiBytes from 'chai-bytes';
+import deepEql from 'deep-eql';
 import * as base58btc from 'base58-universal';
 import {mockKey, seed} from './mock-data.js';
 import multibase from 'multibase';
 import multicodec from 'multicodec';
 const should = chai.should();
-chai.use(chaiBytes);
+chai.use(deepEql);
 const {expect} = chai;
 
 import {Ed25519VerificationKey2020} from '../';
@@ -249,7 +249,7 @@ describe('Ed25519VerificationKey2020', () => {
 
       const signatureBytes2020 = await keyPair2020.signer().sign({data});
 
-      expect(signatureBytes2018).to.equalBytes(signatureBytes2020);
+      expect(signatureBytes2018).to.eql(signatureBytes2020);
       expect(
         await keyPair2020.verifier()
           .verify({data, signature: signatureBytes2018})
@@ -267,7 +267,7 @@ describe('Ed25519VerificationKey2020', () => {
       const data = (new TextEncoder()).encode('test data goes here');
       const signatureBytes2018 = await keyPair2018.signer().sign({data});
       const signatureBytes2020 = await keyPair2020.signer().sign({data});
-      expect(signatureBytes2018).to.equalBytes(signatureBytes2020);
+      expect(signatureBytes2018).to.eql(signatureBytes2020);
     });
   });
 });
