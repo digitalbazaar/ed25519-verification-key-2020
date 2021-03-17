@@ -1,6 +1,6 @@
 # @digitalbazaar/ed25519-verification-key-2020 ChangeLog
 
-## 2.0.0 -
+## 2.0.0 - 2021-03-17
 
 ## Changed
 - Update to use `crypto-ld v5.0`.
