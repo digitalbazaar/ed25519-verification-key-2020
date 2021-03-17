@@ -133,8 +133,10 @@ const keyPair = Ed25519VerificationKey2020.generate();
 
 const {sign} = keyPair.signer();
 
-const data = Buffer.from('test data to sign', 'utf8');
-const signatureValue = await sign({data});
+// data is a Uint8Array of bytes
+const data = (new TextEncoder()).encode('test data goes here');
+// Signing also outputs a Uint8Array, which you can serialize to text etc.
+const signatureValueBytes = await sign({data});
 ```
 
 ### Creating a verifier function
@@ -188,6 +190,7 @@ const keyPair2020 = await Ed25519VerificationKey2020
 // The resulting keyPair2020 will have the same `id` and `controller` properties
 // as its 2018 source. They will also produce and verify the same signatures.
 
+// data is a Uint8Array of bytes
 const data = (new TextEncoder()).encode('test data goes here');
 const signatureBytes2018 = await keyPair2018.signer().sign({data});
 
