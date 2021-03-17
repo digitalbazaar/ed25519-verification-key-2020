@@ -2,13 +2,11 @@
  * Copyright (c) 2020 Digital Bazaar, Inc. All rights reserved.
  */
 import chai from 'chai';
-import deepEql from 'deep-eql';
 import * as base58btc from 'base58-universal';
 import {mockKey, seed} from './mock-data.js';
 import multibase from 'multibase';
 import multicodec from 'multicodec';
 const should = chai.should();
-chai.use(deepEql);
 const {expect} = chai;
 
 import {Ed25519VerificationKey2020} from '../';
