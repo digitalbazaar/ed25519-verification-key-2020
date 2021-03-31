@@ -18,10 +18,10 @@
 
 For use with:
 
-* [`crypto-ld`](https://github.com/digitalbazaar/crypto-ld) `^4.0.0`.
-* [`jsonld-signatures`](https://github.com/digitalbazaar/jsonld-signatures) `digitalbazaar/jsonld-signatures#v6.x`
+* [`crypto-ld`](https://github.com/digitalbazaar/crypto-ld) `^5.0.0`.
+* [`jsonld-signatures`](https://github.com/digitalbazaar/jsonld-signatures) `^8.0.0`
 * `ed25519-signature-2020`
-* [`vc-js`](https://github.com/digitalbazaar/vc-js) `digitalbazaar/vc-js#v7.x`
+* [`vc-js`](https://github.com/digitalbazaar/vc-js) `digitalbazaar/vc-js#v8.x`
 
 See also (related specs):
 
