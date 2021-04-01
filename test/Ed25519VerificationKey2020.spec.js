@@ -14,6 +14,15 @@ import {Ed25519VerificationKey2018}
   from '@digitalbazaar/ed25519-verification-key-2018';
 
 describe('Ed25519VerificationKey2020', () => {
+  describe('class', () => {
+    it('should have suite and SUITE_CONTEXT properties', async () => {
+      expect(Ed25519VerificationKey2020).to.have.property('suite',
+        'Ed25519VerificationKey2020');
+      expect(Ed25519VerificationKey2020).to.have.property('SUITE_CONTEXT',
+        'https://w3id.org/security/suites/ed25519-2020/v1');
+    });
+  });
+
   describe('constructor', () => {
     it('should auto-set key.id based on controller', async () => {
       const {publicKeyMultibase} = mockKey;
@@ -77,9 +86,13 @@ describe('Ed25519VerificationKey2020', () => {
       const keyPair = await Ed25519VerificationKey2020.generate({
         seed: seedBytes, controller: 'did:example:1234'
       });
+      keyPair.revoked = '2019-10-12T07:20:50.52Z';
       const exported = await keyPair.export({
         publicKey: true, privateKey: true
       });
+
+      expect(exported).to.have.keys(['id', 'type', 'controller',
+        'publicKeyMultibase', 'privateKeyMultibase', 'revoked']);
 
       expect(exported.controller).to.equal('did:example:1234');
       expect(exported.type).to.equal('Ed25519VerificationKey2020');
@@ -90,6 +103,18 @@ describe('Ed25519VerificationKey2020', () => {
       expect(exported).to.have.property('privateKeyMultibase',
         'z28PTidbitmCPf5tzHVLnAUNu1KuLXVvrnEKSgCZzjoRDWyh156tjJYN1uwptLjF' +
         'CeHXaCNDmbjyzezLjMxaxD5Rg');
+      expect(exported).to.have.property('revoked', '2019-10-12T07:20:50.52Z');
+    });
+
+    it('should only export public key if specified', async () => {
+      const keyPair = await Ed25519VerificationKey2020.generate({
+        id: 'did:ex:123#test-id'
+      });
+      const exported = await keyPair.export({publicKey: true});
+
+      expect(exported).to.have.keys(['id', 'type', 'publicKeyMultibase']);
+      expect(exported).to.have.property('id', 'did:ex:123#test-id');
+      expect(exported).to.have.property('type', 'Ed25519VerificationKey2020');
     });
   });
 
