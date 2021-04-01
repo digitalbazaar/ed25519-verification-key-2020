@@ -16,7 +16,7 @@
   "dependencies": {
     "@stablelib/ed25519": "^1.0.1",
     "base58-universal": "^1.0.0",
-    "crypto-ld": "^5.0.0",
+    "crypto-ld": "digitalbazaar/crypto-ld#from-id",
     "esm": "^3.2.25"
   },
   "devDependencies": {
