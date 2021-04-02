@@ -86,13 +86,17 @@ describe('Ed25519VerificationKey2020', () => {
       const keyPair = await Ed25519VerificationKey2020.generate({
         seed: seedBytes, controller: 'did:example:1234'
       });
-      keyPair.revoked = '2019-10-12T07:20:50.52Z';
+      const pastDate = new Date(2020, 11, 17).toISOString()
+        .replace(/\.[0-9]{3}/, '');
+      keyPair.revoked = pastDate;
       const exported = await keyPair.export({
         publicKey: true, privateKey: true
       });
 
-      expect(exported).to.have.keys(['id', 'type', 'controller',
-        'publicKeyMultibase', 'privateKeyMultibase', 'revoked']);
+      expect(exported).to.have.keys([
+        'id', 'type', 'controller', 'publicKeyMultibase', 'privateKeyMultibase',
+        'revoked'
+      ]);
 
       expect(exported.controller).to.equal('did:example:1234');
       expect(exported.type).to.equal('Ed25519VerificationKey2020');
@@ -103,7 +107,7 @@ describe('Ed25519VerificationKey2020', () => {
       expect(exported).to.have.property('privateKeyMultibase',
         'z28PTidbitmCPf5tzHVLnAUNu1KuLXVvrnEKSgCZzjoRDWyh156tjJYN1uwptLjF' +
         'CeHXaCNDmbjyzezLjMxaxD5Rg');
-      expect(exported).to.have.property('revoked', '2019-10-12T07:20:50.52Z');
+      expect(exported).to.have.property('revoked', pastDate);
     });
 
     it('should only export public key if specified', async () => {
