@@ -1,5 +1,10 @@
 # @digitalbazaar/ed25519-verification-key-2020 ChangeLog
 
+## 2.1.1 -
+
+### Fixed
+- Ensure `signer()` and `verifier()` objects have an `id` property (for jsigs).
+
 ## 2.1.0 - 2021-04-01
 
 ### Added
