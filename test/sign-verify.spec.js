@@ -24,6 +24,10 @@ const targetSignatureBase58 = '57PG4Ahy97k8iwmRVf8bEK9ZXuy8Q7wz3Mx' +
 
 describe('sign and verify', () => {
   it('works properly', async () => {
+    signer.should.have.property('id',
+      'did:example:1234#z6MkszZtxCmA2Ce4vUV132PCuLQmwnaDD5mw2L23fGNnsiX3');
+    verifier.should.have.property('id',
+      'did:example:1234#z6MkszZtxCmA2Ce4vUV132PCuLQmwnaDD5mw2L23fGNnsiX3');
     const data = stringToUint8Array('test 1234');
     const signature = await signer.sign({data});
     base58btc.encode(signature).should.equal(targetSignatureBase58);
