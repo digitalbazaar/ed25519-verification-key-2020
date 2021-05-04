@@ -1,6 +1,7 @@
 # Ed25519VerificationKey2020 Key Pair Library for Linked Data _(@digitalbazaar/ed25519-verification-key-2020)_
 
 [![Node.js CI](https://github.com/digitalbazaar/ed25519-verification-key-2020/workflows/Node.js%20CI/badge.svg)](https://github.com/digitalbazaar/ed25519-verification-key-2020/actions?query=workflow%3A%22Node.js+CI%22)
+[![NPM Version](https://img.shields.io/npm/v/@digitalbazaar/ed25519-verification-key-2020.svg)](https://npm.im/@digitalbazaar/ed25519-verification-key-2020)
 
 > Javascript library for generating and working with Ed25519VerificationKey2020 key pairs, for use with crypto-ld.
 
@@ -19,8 +20,8 @@
 For use with:
 
 * [`crypto-ld`](https://github.com/digitalbazaar/crypto-ld) `^5.0.0`.
-* [`jsonld-signatures`](https://github.com/digitalbazaar/jsonld-signatures) `^8.0.0`
-* `ed25519-signature-2020`
+* [`ed25519-signature-2020`](https://github.com/digitalbazaar/ed25519-signature-2020) `^2.1.0`
+  crypto suite (with [`jsonld-signatures`](https://github.com/digitalbazaar/jsonld-signatures) `^9.0.0`)
 * [`vc-js`](https://github.com/digitalbazaar/vc-js) `digitalbazaar/vc-js#v8.x`
 
 See also (related specs):
