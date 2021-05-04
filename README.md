@@ -20,9 +20,9 @@
 For use with:
 
 * [`crypto-ld`](https://github.com/digitalbazaar/crypto-ld) `^5.0.0`.
-* [`ed25519-signature-2020`](https://github.com/digitalbazaar/ed25519-signature-2020) `^2.1.0`
+* [`@digitalbazaar/ed25519-signature-2020`](https://github.com/digitalbazaar/ed25519-signature-2020) `^2.1.0`
   crypto suite (with [`jsonld-signatures`](https://github.com/digitalbazaar/jsonld-signatures) `^9.0.0`)
-* [`vc-js`](https://github.com/digitalbazaar/vc-js) `digitalbazaar/vc-js#v8.x`
+* [`@digitalbazaar/vc`](https://github.com/digitalbazaar/vc-js) `^1.0.0`
 
 See also (related specs):
 
