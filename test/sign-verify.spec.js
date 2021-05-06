@@ -4,7 +4,7 @@
 import chai from 'chai';
 chai.should();
 
-import {Ed25519VerificationKey2020} from '../';
+import {Ed25519VerificationKey2020} from '../lib/index';
 import {mockKey, suites} from './mock-data.js';
 import {stringToUint8Array} from './text-encoder.js';
 import * as base58btc from 'base58-universal';

@@ -9,7 +9,7 @@ import multicodec from 'multicodec';
 const should = chai.should();
 const {expect} = chai;
 
-import {Ed25519VerificationKey2020} from '../';
+import {Ed25519VerificationKey2020} from '../lib/index';
 import {Ed25519VerificationKey2018}
   from '@digitalbazaar/ed25519-verification-key-2018';
 

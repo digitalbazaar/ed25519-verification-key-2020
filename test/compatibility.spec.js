@@ -4,7 +4,7 @@
 import chai from 'chai';
 chai.should();
 
-import {Ed25519VerificationKey2020} from '../';
+import {Ed25519VerificationKey2020} from '../lib/index';
 import {stringToUint8Array} from './text-encoder.js';
 import * as StableLibEd25519 from '@stablelib/ed25519';
 import {randomBytes} from 'crypto';

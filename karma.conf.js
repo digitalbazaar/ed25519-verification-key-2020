@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2021 Digital Bazaar, Inc. All rights reserved.
  */
 module.exports = function(config) {
 
@@ -17,7 +17,7 @@ module.exports = function(config) {
     ],
 
     // list of files to exclude
-    exclude: ['test/compatibility.spec.js'],
+    exclude: ['**/compatibility.spec.js'],
 
     // preprocess matching files before serving them to the browser
     // preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
@@ -28,7 +28,17 @@ module.exports = function(config) {
     webpack: {
       //mode: 'production',
       mode: 'development',
-      devtool: 'inline-source-map'
+      devtool: 'inline-source-map',
+      node: {
+        // Needed to address jsonld.js's usage of 'global', until that's fixed
+        global: true
+      },
+      resolve: {
+        fallback: {
+          url: false,
+          crypto: false
+        }
+      }
     },
 
     // test results reporter to use
@@ -48,7 +58,7 @@ module.exports = function(config) {
     //   config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
-    // enable / disable watching file and executing tests whenever any
+    // enable / disable watching file and executing test whenever any
     // file changes
     autoWatch: false,
 
@@ -58,7 +68,7 @@ module.exports = function(config) {
     browsers: ['ChromeHeadless'],
 
     // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
+    // if true, Karma captures browsers, runs the test and exits
     singleRun: true,
 
     // Concurrency level

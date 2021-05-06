@@ -12,10 +12,14 @@ module.exports = {
   },
   node: false,
   resolve: {
-    alias: {
-      // throw an error if trying to import 'crypto'
-      // workaround for "node" feature not working in sub-dependencies
-      crypto$: path.resolve(__dirname, 'no-crypto.js')
+    fallback: {
+      util: false,
+      crypto: false
     }
+    // alias: {
+    //   // throw an error if trying to import 'crypto'
+    //   // workaround for "node" feature not working in sub-dependencies
+    //   crypto$: path.resolve(__dirname, 'no-crypto.js')
+    // }
   }
 };
