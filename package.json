@@ -22,7 +22,8 @@
     ".": {
       "require": "./dist/index.js",
       "import": "./dist/esm/index.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "dependencies": {
     "@stablelib/ed25519": "^1.0.1",
@@ -69,13 +70,13 @@
   "scripts": {
     "rollup": "rollup -c rollup.config.js",
     "build": "npm run clear && npm run rollup && ./build-dist.sh",
-    "clear": "rimraf dist/*",
+    "clear": "rimraf dist/ && mkdir dist",
     "prepare": "npm run build",
+    "rebuild": "npm run clear && npm run build",
     "test": "npm run lint && npm run test-node && npm run test-karma",
     "test-karma": "karma start karma.conf.js",
     "test-node": "cross-env NODE_ENV=test mocha -r esm --preserve-symlinks -t 10000 test/**/*.spec.js",
-    "lint": "eslint .",
-    "rebuild": "npm run clear && npm run build"
+    "lint": "eslint ."
   },
   "nyc": {
     "exclude": [
