@@ -13,6 +13,9 @@ import {Ed25519VerificationKey2020} from '../';
 import {Ed25519VerificationKey2018}
   from '@digitalbazaar/ed25519-verification-key-2018';
 
+// multibase base58-btc header
+const MULTIBASE_BASE58BTC_HEADER = 'z';
+
 describe('Ed25519VerificationKey2020', () => {
   describe('class', () => {
     it('should have suite and SUITE_CONTEXT properties', async () => {
