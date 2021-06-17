@@ -165,7 +165,8 @@ describe('Ed25519VerificationKey2020', () => {
       mcType.should.equal('ed25519-pub');
       const pubkeyBytes =
         multicodec.addPrefix('ed25519-pub', multicodec.rmPrefix(mcPubkeyBytes));
-      const encodedPubkey = 'z' + base58btc.encode(pubkeyBytes);
+      const encodedPubkey = MULTIBASE_BASE58BTC_HEADER +
+        base58btc.encode(pubkeyBytes);
       encodedPubkey.should.equal(keyPair.publicKeyMultibase);
       expect(typeof keyPair.fingerprint()).to.equal('string');
     });
