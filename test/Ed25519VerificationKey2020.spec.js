@@ -31,7 +31,7 @@ describe('Ed25519VerificationKey2020', () => {
       const keyPair = new Ed25519VerificationKey2020(
         {controller, publicKeyMultibase});
       expect(keyPair.id).to.equal(
-        'did:example:1234#z6MkszZtxCmA2Ce4vUV132PCuLQmwnaDD5mw2L23fGNnsiX3');
+        'did:example:1234#z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T');
     });
 
     it('should error if publicKeyMultibase property is missing', async () => {
@@ -64,8 +64,8 @@ describe('Ed25519VerificationKey2020', () => {
         .decode(ldKeyPair.privateKeyMultibase.slice(1));
       const publicKeyBytes = base58btc
         .decode(ldKeyPair.publicKeyMultibase.slice(1));
-      privateKeyBytes.length.should.equal(64);
-      publicKeyBytes.length.should.equal(32);
+      privateKeyBytes.length.should.equal(66);
+      publicKeyBytes.length.should.equal(34);
     });
 
     it('should generate the same key from the same seed', async () => {
@@ -103,10 +103,10 @@ describe('Ed25519VerificationKey2020', () => {
       expect(exported.id).to.equal('did:example:1234#' +
         'z6Mkpw72M9suPCBv48X2Xj4YKZJH9W7wzEK1aS6JioKSo89C');
       expect(exported).to.have.property('publicKeyMultibase',
-        'zBUqykudU3ehSwdgKrA6hUTkHKvr6aM4etRBNtXMRsuMp');
+        'z6Mkpw72M9suPCBv48X2Xj4YKZJH9W7wzEK1aS6JioKSo89C');
       expect(exported).to.have.property('privateKeyMultibase',
-        'z28PTidbitmCPf5tzHVLnAUNu1KuLXVvrnEKSgCZzjoRDWyh156tjJYN1uwptLjF' +
-        'CeHXaCNDmbjyzezLjMxaxD5Rg');
+        'zrv1mHUXWkWUpThaapTt8tkxSotE1iSRRuPNarhs3vTn2z61hQESuKXG7zGQsePB7JHd' +
+        'jaCzPZmBkkqULLvoLHoD82a');
       expect(exported).to.have.property('revoked', pastDate);
     });
 
@@ -163,7 +163,8 @@ describe('Ed25519VerificationKey2020', () => {
       const mcPubkeyBytes = multibase.decode(fingerprint);
       const mcType = multicodec.getCodec(mcPubkeyBytes);
       mcType.should.equal('ed25519-pub');
-      const pubkeyBytes = multicodec.rmPrefix(mcPubkeyBytes);
+      const pubkeyBytes =
+        multicodec.addPrefix('ed25519-pub', multicodec.rmPrefix(mcPubkeyBytes));
       const encodedPubkey = 'z' + base58btc.encode(pubkeyBytes);
       encodedPubkey.should.equal(keyPair.publicKeyMultibase);
       expect(typeof keyPair.fingerprint()).to.equal('string');
