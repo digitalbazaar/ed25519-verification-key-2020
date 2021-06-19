@@ -199,7 +199,7 @@ describe('Ed25519VerificationKey2020', () => {
       result.valid.should.be.false;
       expect(result.error).to.exist;
       result.error.message.should.equal(
-        '`fingerprint` must be a multibase encoded string.');
+        '"fingerprint" must be a multibase encoded string.');
     });
 
     it('should reject an invalid fingerprint', async () => {
@@ -229,7 +229,7 @@ describe('Ed25519VerificationKey2020', () => {
       result.valid.should.be.false;
       expect(result.error).to.exist;
       result.error.message.should.equal(
-        '`fingerprint` must be a multibase encoded string.');
+        '"fingerprint" must be a multibase encoded string.');
     });
 
     it('should reject an improperly encoded fingerprint', async () => {
