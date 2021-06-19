@@ -1,5 +1,14 @@
 # @digitalbazaar/ed25519-verification-key-2020 ChangeLog
 
+## 3.0.0 - 2021-06-19
+
+### Fixed
+- **BREAKING**: Fix improperly encoded public and private keys.
+- Perform better key validation when creating a key.
+- Remove TextEncoder/TextDecoder polyfill (provided in all environments now).
+- Do not leak private key details in errors.
+- Clean up errors.
+
 ## 2.1.1 - 2021-04-08
 
 ### Fixed
