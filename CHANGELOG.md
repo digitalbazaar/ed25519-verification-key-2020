@@ -7,7 +7,7 @@
 - Perform better key validation when creating a key.
 - Remove TextEncoder/TextDecoder polyfill (provided in all environments now).
 - Do not leak private key details in errors.
-- Clean up errors.
+- Fix error string consistency.
 
 ## 2.1.1 - 2021-04-08
 
