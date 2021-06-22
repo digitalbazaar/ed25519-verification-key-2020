@@ -1,5 +1,10 @@
 # @digitalbazaar/ed25519-verification-key-2020 ChangeLog
 
+## 3.1.0 - 2021-xx-xx
+
+### Changed
+- Allow keys to be created purely for verification or purely for signing.
+
 ## 3.0.0 - 2021-06-19
 
 ### Fixed
