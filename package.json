@@ -16,6 +16,7 @@
   "dependencies": {
     "@stablelib/ed25519": "^1.0.1",
     "base58-universal": "^1.0.0",
+    "base64url-universal": "^1.1.0",
     "crypto-ld": "^5.1.0",
     "esm": "^3.2.25"
   },
