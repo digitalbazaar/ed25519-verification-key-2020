@@ -302,4 +302,49 @@ describe('Ed25519VerificationKey2020', () => {
       expect(signatureBytes2018).to.eql(signatureBytes2020);
     });
   });
+
+  describe('JsonWebKey2020', () => {
+    it('round trip imports/exports', async () => {
+      const keyData = {
+        id: 'did:example:123#kPrK_qmxVWaYVA9wwBF6Iuo3vVzz7TxHCTwXBygrS4k',
+        type: 'JsonWebKey2020',
+        controller: 'did:example:123',
+        publicKeyJwk: {
+          kty: 'OKP',
+          crv: 'Ed25519',
+          x: '11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo'
+        }
+      };
+
+      const key = await Ed25519VerificationKey2020.from(keyData);
+
+      expect(key.controller).to.equal('did:example:123');
+      expect(key.id).to
+        .equal('did:example:123#kPrK_qmxVWaYVA9wwBF6Iuo3vVzz7TxHCTwXBygrS4k');
+      expect(key.publicKeyMultibase).to
+        .equal('z6MktwupdmLXVVqTzCw4i46r4uGyosGXRnR3XjN4Zq7oMMsw');
+
+      const exported = await key.toJsonWebKey2020();
+
+      expect(exported).to.eql(keyData);
+    });
+
+    it('computes jwk thumbprint', async () => {
+      const keyData = {
+        id: 'did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A',
+        type: 'JsonWebKey2020',
+        controller: 'did:example:123',
+        publicKeyJwk: {
+          kty: 'OKP',
+          crv: 'Ed25519',
+          x: 'VCpo2LMLhn6iWku8MKvSLg2ZAoC-nlOyPVQaO3FxVeQ'
+        }
+      };
+
+      const key = await Ed25519VerificationKey2020.from(keyData);
+
+      expect(await key.jwkThumbprint()).to
+        .equal('_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A');
+    });
+  });
 });
