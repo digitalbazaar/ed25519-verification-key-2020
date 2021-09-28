@@ -1,5 +1,11 @@
 # @digitalbazaar/ed25519-verification-key-2020 ChangeLog
 
+## 3.2.0 - 
+
+### Added
+- Add support for `JsonWebKey2020` and JWK import/export, as well as
+  JWK thumbprint function.
+
 ## 3.1.0 - 2021-06-24
 
 ### Changed
