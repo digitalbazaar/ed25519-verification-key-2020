@@ -306,6 +306,7 @@ describe('Ed25519VerificationKey2020', () => {
   describe('JsonWebKey2020', () => {
     it('round trip imports/exports', async () => {
       const keyData = {
+        '@context': 'https://w3id.org/security/jws/v1',
         id: 'did:example:123#kPrK_qmxVWaYVA9wwBF6Iuo3vVzz7TxHCTwXBygrS4k',
         type: 'JsonWebKey2020',
         controller: 'did:example:123',
