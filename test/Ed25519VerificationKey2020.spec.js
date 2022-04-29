@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2020 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2020-2022 Digital Bazaar, Inc. All rights reserved.
  */
 import chai from 'chai';
 import * as base58btc from 'base58-universal';
@@ -9,9 +9,10 @@ import multicodec from 'multicodec';
 const should = chai.should();
 const {expect} = chai;
 
-import {Ed25519VerificationKey2020} from '../';
-import {Ed25519VerificationKey2018}
-  from '@digitalbazaar/ed25519-verification-key-2018';
+import {Ed25519VerificationKey2020} from '../lib/index.js';
+import {
+  Ed25519VerificationKey2018
+} from '@digitalbazaar/ed25519-verification-key-2018';
 
 // multibase base58-btc header
 const MULTIBASE_BASE58BTC_HEADER = 'z';
