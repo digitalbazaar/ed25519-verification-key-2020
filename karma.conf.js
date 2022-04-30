@@ -1,8 +1,6 @@
 /*
  * Copyright (c) 2020 Digital Bazaar, Inc. All rights reserved.
  */
-const path = require('path');
-
 module.exports = function(config) {
 
   config.set({
@@ -33,11 +31,6 @@ module.exports = function(config) {
       devtool: 'inline-source-map',
       node: {
         crypto: false
-      },
-      resolve: {
-        alias: {
-          crypto$: path.resolve(__dirname, 'no-crypto.js')
-        }
       }
     },
 
