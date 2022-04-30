@@ -11,6 +11,9 @@ module.exports = {
     node: true,
     browser: true
   },
+  globals: {
+    globalThis: false
+  },
   parserOptions: {
     // this is required for dynamic import()
     ecmaVersion: 2020
