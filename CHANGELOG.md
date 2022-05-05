@@ -1,5 +1,11 @@
 # @digitalbazaar/ed25519-verification-key-2020 ChangeLog
 
+## 3.3.0 - 2022-05-xx
+
+### Changed
+- Replace underlying ed25519 implementation with `@noble/ed25519`. This
+  should be a non-breaking change.
+
 ## 3.2.0 - 2021-10-15
 
 ### Added
