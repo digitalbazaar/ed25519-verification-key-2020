@@ -288,6 +288,24 @@ describe('Ed25519VerificationKey2020', () => {
       ).to.be.true;
     });
 
+    it('2020 key should round trip serialize to 2018', async () => {
+      const keyPair2020 = await Ed25519VerificationKey2020.generate({
+        seed: seedBytes, controller: 'did:example:1234'
+      });
+
+      const serialized2018 = keyPair2020.toEd255519VerificationKey2018({
+        publicKey: true, privateKey: true
+      });
+
+      const parsedKeyPair = await Ed25519VerificationKey2020
+        .from(serialized2018);
+
+      expect(keyPair2020.publicKeyMultibase).to
+        .equal(parsedKeyPair.publicKeyMultibase);
+      expect(keyPair2020.publicKeyMultibase).to
+        .equal(parsedKeyPair.publicKeyMultibase);
+    });
+
     it('2020 key should generate the same from seed as 2018', async () => {
       const keyPair2018 = await Ed25519VerificationKey2018.generate({
         seed: seedBytes, controller: 'did:example:1234'
