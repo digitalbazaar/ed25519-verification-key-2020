@@ -1,6 +1,6 @@
 # @digitalbazaar/ed25519-verification-key-2020 ChangeLog
 
-## 4.0.0 - 2022-xx-xx
+## 4.0.0 - 2022-06-02
 
 ### Changed
 - **BREAKING**: Convert to module (ESM).
