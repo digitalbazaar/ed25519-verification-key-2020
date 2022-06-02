@@ -11,9 +11,6 @@
   "type": "module",
   "exports": "./lib/index.js",
   "browser": {
-    "buffer": false,
-    "crypto": false,
-    "util": false,
     "./lib/ed25519.js": "./lib/ed25519-browser.js"
   },
   "files": [
