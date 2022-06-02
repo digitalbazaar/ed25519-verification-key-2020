@@ -7,9 +7,9 @@ chai.should();
 import {Ed25519VerificationKey2020} from '../lib/index.js';
 import {stringToUint8Array} from './text-encoder.js';
 import * as StableLibEd25519 from '@stablelib/ed25519';
-import {randomBytes} from 'crypto';
+import {randomBytes} from 'node:crypto';
 
-import {promisify} from 'util';
+import {promisify} from 'node:util';
 
 const randomBytesAsync = promisify(randomBytes);
 
