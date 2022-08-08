@@ -6,7 +6,7 @@
 - Added a new validators file with `assertKeyBytes.`
 - Public key byte checks have error codes compatible with the `did:key` spec.
 
-## Changed
+### Changed
 - Previous key bytes checks are now all done with `checkKeyBytes`.
 
 ## Fixed
