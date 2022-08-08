@@ -3,7 +3,7 @@
 ## 4.1.0 - 
 
 ### Added
-- Added a new validators file with `checkKeyBytes.`
+- Added a new validators file with `assertKeyBytes.`
 - Public key byte checks have error codes compatible with the `did:key` spec.
 
 ## Changed
