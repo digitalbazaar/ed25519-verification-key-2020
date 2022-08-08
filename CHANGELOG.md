@@ -7,7 +7,7 @@
 - Public key byte checks have error codes compatible with the `did:key` spec.
 
 ### Changed
-- Previous key bytes checks are now all done with `checkKeyBytes`.
+- Previous key bytes checks are now all done with `assertKeyBytes`.
 
 ### Fixed
 - No longer throw a `TypeError` when passing in a Uint8Array of the wrong length.
