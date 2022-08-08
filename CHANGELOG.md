@@ -9,7 +9,7 @@
 ### Changed
 - Previous key bytes checks are now all done with `checkKeyBytes`.
 
-## Fixed
+### Fixed
 - No longer throw a `TypeError` when passing in a Uint8Array of the wrong length.
 
 ## 4.0.0 - 2022-06-02
