@@ -1,5 +1,17 @@
 # @digitalbazaar/ed25519-verification-key-2020 ChangeLog
 
+## 4.1.0 - 
+
+### Added
+- Added a new validators file with `checkKeyBytes.`
+- Public key byte checks have error codes compatible with the `did:key` spec.
+
+## Changed
+- Previous key bytes checks are now all done with `checkKeyBytes`.
+
+## Fixed
+- No longer throw a `TypeError` when passing in a Uint8Array of the wrong length.
+
 ## 4.0.0 - 2022-06-02
 
 ### Changed
