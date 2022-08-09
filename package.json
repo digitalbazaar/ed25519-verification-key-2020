@@ -1,6 +1,6 @@
 {
   "name": "@digitalbazaar/ed25519-verification-key-2020",
-  "version": "4.1.0",
+  "version": "4.1.1-0",
   "description": "Javascript library for generating and working with Ed25519VerificationKey2020 key pairs, for use with crypto-ld.",
   "homepage": "https://github.com/digitalbazaar/ed25519-verification-key-2020",
   "repository": {
