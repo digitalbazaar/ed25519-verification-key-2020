@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2020-2022 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2020-2024 Digital Bazaar, Inc. All rights reserved.
  */
 import chai from 'chai';
 import * as base58btc from 'base58-universal';
@@ -301,6 +301,52 @@ describe('Ed25519VerificationKey2020', () => {
       const signatureBytes2018 = await keyPair2018.signer().sign({data});
       const signatureBytes2020 = await keyPair2020.signer().sign({data});
       expect(signatureBytes2018).to.eql(signatureBytes2020);
+    });
+  });
+
+  describe('JsonWebKey', () => {
+    it('round trip imports/exports', async () => {
+      const keyData = {
+        '@context': 'https://w3id.org/security/jwk/v1',
+        id: 'did:example:123#kPrK_qmxVWaYVA9wwBF6Iuo3vVzz7TxHCTwXBygrS4k',
+        type: 'JsonWebKey',
+        controller: 'did:example:123',
+        publicKeyJwk: {
+          kty: 'OKP',
+          crv: 'Ed25519',
+          x: '11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo'
+        }
+      };
+
+      const key = await Ed25519VerificationKey2020.from(keyData);
+
+      expect(key.controller).to.equal('did:example:123');
+      expect(key.id).to
+        .equal('did:example:123#kPrK_qmxVWaYVA9wwBF6Iuo3vVzz7TxHCTwXBygrS4k');
+      expect(key.publicKeyMultibase).to
+        .equal('z6MktwupdmLXVVqTzCw4i46r4uGyosGXRnR3XjN4Zq7oMMsw');
+
+      const exported = await key.toJsonWebKey();
+
+      expect(exported).to.eql(keyData);
+    });
+
+    it('computes jwk thumbprint', async () => {
+      const keyData = {
+        id: 'did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A',
+        type: 'JsonWebKey',
+        controller: 'did:example:123',
+        publicKeyJwk: {
+          kty: 'OKP',
+          crv: 'Ed25519',
+          x: 'VCpo2LMLhn6iWku8MKvSLg2ZAoC-nlOyPVQaO3FxVeQ'
+        }
+      };
+
+      const key = await Ed25519VerificationKey2020.from(keyData);
+
+      expect(await key.jwkThumbprint()).to
+        .equal('_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A');
     });
   });
 
