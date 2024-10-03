@@ -1,5 +1,10 @@
 # @digitalbazaar/ed25519-verification-key-2020 ChangeLog
 
+## 4.2.0 - 2024-10-dd
+
+### Added
+- Add support for reading `JsonWebKey`-typed keys.
+
 ## 4.1.0 - 2022-08-09
 
 ### Added
