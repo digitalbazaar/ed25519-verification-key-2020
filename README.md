@@ -154,7 +154,7 @@ const valid = await verify({data, signature});
 // true
 ```
 
-### Converting from previous Ed25519VerificationKey2018 key type
+### Converting to and from previous Ed25519VerificationKey2018 key type
 
 If you have serialized and stored keys of the previous 
 `Ed25519VerificationKey2018` key type (for example, generated using
@@ -173,7 +173,7 @@ things to keep in mind:
 * They `generate()` the same key material, given the same `seed` parameter.
 * Both the 2018 and 2020 keys produce and verify the same signatures.
 
-Example of converting:
+Example of converting from 2018:
 
 ```js
 import {Ed25519VerificationKey2018}
@@ -199,6 +199,18 @@ const signatureBytes2018 = await keyPair2018.signer().sign({data});
 // the same.
 await keyPair2020.verifier().verify({data, signature: signatureBytes2018})
 // true
+```
+
+Example of converting to the 2018 serialization:
+
+```js
+const keyPair2020 = await Ed25519VerificationKey2020.generate({
+  controller: 'did:example:1234'
+});
+
+const keyObject2018 = keyPair2020.toEd255519VerificationKey2018({
+  publicKey: true, privateKey: true, includeContext: true
+});
 ```
 
 ## Contribute
